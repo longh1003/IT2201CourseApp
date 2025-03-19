@@ -21,15 +21,15 @@ class CourseViewSet(viewsets.ViewSet, generics.ListAPIView):
 
         q = self.request.query_params.get('q')
         if q:
-            query = query.filter(subject__icontains=q)
-
+            query = query.filter(subject__contains=q)
         cate_id = self.request.query_params.get('category_id')
         if cate_id:
-            query = query.filter(category_id=cate_id)
-
+            query = query.filter(category=cate_id)
         return query
 
-
+    # bth2 bai 3
+    # courses/{course_id}/lessons/?q=
+    # {course_id} = pk
     @action(methods=['get'], url_path='lessons', detail=True)
     def get_lessons(self, request, pk):
         lessons = self.get_object().lesson_set.filter(active=True)

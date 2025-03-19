@@ -42,8 +42,12 @@ INSTALLED_APPS = [
     'courses.apps.CoursesConfig',
     'ckeditor',
     'ckeditor_uploader',
+<<<<<<< HEAD
     'rest_framework',
     'drf_yasg'
+=======
+    'rest_framework'
+>>>>>>> cae1b4a53cb46f46add56119ceb431ffb62d7a6f
 ]
 
 MIDDLEWARE = [

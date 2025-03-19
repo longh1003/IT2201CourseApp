@@ -51,7 +51,6 @@ class UserSerializer(serializers.ModelSerializer):
             }
         }
 
-
     def create(self, validated_data):
         data = validated_data.copy()
         u = User(**data)
