@@ -59,14 +59,25 @@ class UserSerializer(serializers.ModelSerializer):
 
         return u
 
+    def update(self, instance, validated_data):
+        if 'password' in validated_data:
+            instance.set_password(validated_data('password'))
+            instance.save()
+
+        return instance
+
     def to_representation(self, instance):
         d = super().to_representation(instance)
-        d['avatar'] = instance.avatar.url
+        d['avatar'] = instance.avatar.url if instance.avatar else ''
         return d
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    def to_representation(self, instance):
+        #truyen vao self
+        data = super().to_representation(instance)
+        data['user'] = UserSerializer(instance.user).data
+        return data
 
     class Meta:
         model = Comment

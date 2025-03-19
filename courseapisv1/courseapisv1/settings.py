@@ -17,7 +17,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_ROOT = '%s/courses/static/' % BASE_DIR
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -28,7 +27,6 @@ SECRET_KEY = 'django-insecure-(t1-=cbj&_(@mvsmep#5_o1(n!18mq=1pl#d9aq0=!(rs#@_ky
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -42,12 +40,9 @@ INSTALLED_APPS = [
     'courses.apps.CoursesConfig',
     'ckeditor',
     'ckeditor_uploader',
-<<<<<<< HEAD
     'rest_framework',
-    'drf_yasg'
-=======
-    'rest_framework'
->>>>>>> cae1b4a53cb46f46add56119ceb431ffb62d7a6f
+    'drf_yasg',
+    'oauth2_provider'
 ]
 
 MIDDLEWARE = [
@@ -59,6 +54,16 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    )
+}
+
+# co loi neu thieu
+OAUTH2_PROVIDER = {'OAUTH2_BACKEND_CLASS': 'oauth2_provider.oauth2_backends.JSONOAuthLibCore'}
 
 ROOT_URLCONF = 'courseapisv1.urls'
 
@@ -82,7 +87,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'courseapisv1.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -92,14 +96,15 @@ DATABASES = {
         'NAME': 'coursedb',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '' # mặc định localhost
+        'HOST': ''  # mặc định localhost
     }
 }
 
 import pymysql
+
 pymysql.install_as_MySQLdb()
 
-AUTH_USER_MODEL='courses.User'
+AUTH_USER_MODEL = 'courses.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -119,7 +124,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -130,7 +134,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -148,8 +151,11 @@ from cloudinary.utils import cloudinary_url
 
 # Configuration
 cloudinary.config(
-    cloud_name = "dxxwcby8l",
-    api_key = "448651448423589",
-    api_secret = "ftGud0r1TTqp0CGp5tjwNmkAm-A", # Click 'View API Keys' above to copy your API secret
+    cloud_name="dxxwcby8l",
+    api_key="448651448423589",
+    api_secret="ftGud0r1TTqp0CGp5tjwNmkAm-A",  # Click 'View API Keys' above to copy your API secret
     secure=True
 )
+
+CLIENT_ID = 'NUjwIpgVUWPt3UZiJUQygOkKjK8yPPnmBwodvkti'
+CLIENT_SECRET = 'Lw0Q63oGgiMgQCE2NxuD9cOVXOW4j6hHmZmX9JbneOAGK0LNNNFOPVRIFTX9xP3g17mbeV1iyYIaBk3YmtDFOEHQ1b7Nze9VMtM9FvfsOcqab7JkHGcKtm0zIjb7CLVg'
